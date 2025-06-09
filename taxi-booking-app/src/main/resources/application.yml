@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: taxi-booking-app
+  
+  # Database Configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/taxiapp
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  
+  # JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  
+  # Flyway Configuration
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+    
+# Server Configuration
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1
+
+# JWT Configuration
+jwt:
+  secret: your-256-bit-secret-key-here
+  expiration: 86400000 # 24 hours in milliseconds
+  refresh-token:
+    expiration: 2592000000 # 30 days in milliseconds
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.taxiapp: DEBUG
+    org.springframework.web: INFO
+    org.hibernate: INFO 

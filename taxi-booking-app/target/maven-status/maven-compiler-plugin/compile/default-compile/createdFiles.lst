@@ -1,0 +1,7 @@
+com/taxiapp/user/entity/UserType.class
+com/taxiapp/user/repository/UserRepository.class
+com/taxiapp/user/entity/User.class
+com/taxiapp/common/controller/HealthController.class
+com/taxiapp/common/entity/BaseEntity.class
+com/taxiapp/TaxiBookingApplication.class
+com/taxiapp/user/entity/UserStatus.class
