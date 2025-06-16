@@ -1,18 +1,18 @@
 CREATE TYPE booking_status AS ENUM ('PENDING', 'ACCEPTED', 'STARTED', 'COMPLETED', 'CANCELLED');
 
 CREATE TABLE bookings (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    passenger_id UUID NOT NULL REFERENCES users(id),
-    driver_id UUID REFERENCES driver_profiles(id),
-    pickup_latitude DOUBLE PRECISION NOT NULL,
-    pickup_longitude DOUBLE PRECISION NOT NULL,
-    dropoff_latitude DOUBLE PRECISION NOT NULL,
-    dropoff_longitude DOUBLE PRECISION NOT NULL,
+    id UUID PRIMARY KEY,
+    passenger_id UUID NOT NULL,
+    driver_id UUID,
+    pickup_latitude DOUBLE NOT NULL,
+    pickup_longitude DOUBLE NOT NULL,
+    dropoff_latitude DOUBLE NOT NULL,
+    dropoff_longitude DOUBLE NOT NULL,
     pickup_address TEXT,
     dropoff_address TEXT,
     estimated_price DECIMAL(10,2) NOT NULL,
     final_price DECIMAL(10,2),
-    status booking_status NOT NULL DEFAULT 'PENDING',
+    status VARCHAR(20) NOT NULL DEFAULT 'PENDING',
     started_at TIMESTAMP,
     completed_at TIMESTAMP,
     cancelled_at TIMESTAMP,
@@ -22,7 +22,9 @@ CREATE TABLE bookings (
     passenger_review TEXT,
     driver_review TEXT,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (passenger_id) REFERENCES users(id),
+    FOREIGN KEY (driver_id) REFERENCES driver_profiles(id)
 );
 
 CREATE INDEX idx_bookings_passenger ON bookings(passenger_id);
